@@ -1,0 +1,53 @@
+﻿@model IEnumerable<RestauranteEnHawai.Models.Venta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Crear Nueva Venta</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroOrden)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaHora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlatoVendido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadVendida)
+            </th>
+            <th>Acciones Disponibles</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroOrden)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaHora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlatoVendido.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadVendida)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { numeroOrden=item.NumeroOrden }) |
+                @Html.ActionLink("Ver detalles", "Details", new { numeroOrden=item.NumeroOrden }) |
+                @Html.ActionLink("Borrar", "Delete", new { numeroOrden=item.NumeroOrden })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

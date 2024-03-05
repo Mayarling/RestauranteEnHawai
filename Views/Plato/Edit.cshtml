@@ -1,0 +1,92 @@
+﻿@model RestauranteEnHawai.Models.Plato
+
+@{
+    ViewData["Title"] = "Editar plato";
+}
+
+<h1>Editar</h1>
+
+<h4>Plato</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control"  readonly="true"/>
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Imagen" style="=width:100px">Imagen</label><br />
+                <input onchange="cargarImagen(this);" asp-for="Imagen" placeholder="Imagen" type="file" accept="imagen/*" value="@Model.Imagen"/>
+                <span asp-validation-for="Imagen" class="text-danger"></span>
+            </div>
+            <div class="mb-2">
+                <img id="imagen" height="100" width="100" class="border border-dark" src="data:image/png;base64, @Model.Imagen" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Categoria" class="control-label"></label>
+                <select asp-for="Categoria" class="form-control">
+                    @{
+                        if (Model.Categoria.Equals(TipoPlato.LOCAL))
+                        {
+                            <option value="LOCAL" selected>Local</option>
+                        }
+                        else
+                        {
+                            <option value="LOCAL">Local</option>
+                        }
+                        if (Model.Categoria.Equals(TipoPlato.EXTRANJERO))
+                        {
+                            <option value="EXTRANJERO" selected>Extranjero</option>
+                        }
+                        else
+                        {
+                            <option value="EXTRANJERO">Extranjero</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="Categoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la lista de platos</a>
+</div>
+
+<script>
+    function cargarImagen(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagen').attr('src', e.target.result).width(100).height(100);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

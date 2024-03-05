@@ -1,0 +1,53 @@
+﻿@model IEnumerable<RestauranteEnHawai.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroDeReserva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaHoraReserva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadPersonas)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroDeReserva)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaHoraReserva)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadPersonas)
+            </td>
+            <td>
+                    @Html.ActionLink("Editar", "Edit", new { numeroReserva=item.NumeroDeReserva }) |
+                    @Html.ActionLink("Ver detalles", "Details", new { numeroReserva=item.NumeroDeReserva }) |
+                    @Html.ActionLink("Borrar", "Delete", new { numeroReserva=item.NumeroDeReserva })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

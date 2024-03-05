@@ -1,0 +1,32 @@
+﻿@model IEnumerable<RestauranteEnHawai.Models.EstadisticaVentas>
+
+@{
+    ViewData["Title"] = "ReportePlatos";
+}
+
+<h1>Reporte de Platos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.totalVentas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombrePlato)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.totalVentas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombrePlato)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

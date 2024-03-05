@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Reportes";
+}
+<script>
+    function mostrarFechaFin() {
+        var combo = document.getElementById("tipo-reporte");
+        var fechaFin = document.getElementById("fecha-fin");
+        var tipoReporte = combo.options[combo.selectedIndex].value;
+        var controlesFechaFin = document.getElementById("controles-fecha-fin");
+        if (tipoReporte === "ventas-rango") {
+            //controlesFechaFin.style.display = "block";
+            controlesFechaFin.style.visibility = "visible";
+            fechaFin.disabled = false;
+        } else {
+            //controlesFechaFin.style.display = "none";
+            controlesFechaFin.style.visibility = "hidden";
+            fechaFin.disabled = true;
+        }
+    }
+</script>
+<h1>Reportes</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="GenerarReporte">
+            <div class="form-group">
+                <label for="label-tipo-reporte" class="control-label">Tipo de Reporte:</label>
+                <select id="tipo-reporte" name="tipo-reporte" onchange="mostrarFechaFin()">
+                    <option value="ventas-mes" selected>Ventas por mes</option>
+                    <option value="ventas-dia">Ventas por día</option>
+                    <option value="ventas-rango">Ventas por rango de fecha</option>
+                    <option value="platos-mes">Platos más vendidos por mes</option>
+                </select>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label id="label-fecha-inicio" class="control-label" for="fecha-inicio">Fecha de inicio</label>
+                <input id="fecha-inicio" name="fecha-inicio" type="date" class="form-control" required />
+                <span class="text-danger"></span>
+            </div>
+            <div id="controles-fecha-fin" class="form-group" style="visibility: hidden">
+                <label id="label-fecha-fin" class="control-label" for="fecha-fin">Fecha de fin</label>
+                <input id="fecha-fin" name="fecha-fin" type="date" class="form-control" required disabled />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Generar Reporte" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
